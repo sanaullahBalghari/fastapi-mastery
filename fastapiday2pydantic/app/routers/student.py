@@ -1,49 +1,50 @@
-from fastapi import FastAPI
+from fastapi import APIRouter
 from pydantic import BaseModel
 
+router = APIRouter()
 
-app=FastAPI()
+
 class Student(BaseModel):
     id: int
-    name:str
+    name: str
     age: int
     department: str
+
 
 students = []
 
 
-
-@app.post("/student")
-
-def create_student(student:Student):
+@router.post("/student")
+def create_student(student: Student):
     students.append(student)
     return {
         "message": "Student Added",
         "student": student
     }
 
-@app.get("/students")
-def get_students():
 
+@router.get("/students")
+def get_students():
     return students
 
 
-@app.get("/student/{student_id}")
+@router.get("/student/{student_id}")
+def get_student(student_id: int):
 
-def get_student(student_id:int):
     for student in students:
         if student.id == student_id:
             return student
-        return {"message":"student not found"}
+
+    return {
+        "message": "Student Not Found"
+    }
 
 
-@app.put("/students/{student_id}")
+@router.put("/student/{student_id}")
 def update_student(student_id: int, updated_student: Student):
 
     for index, student in enumerate(students):
-
         if student.id == student_id:
-
             students[index] = updated_student
 
             return {
@@ -56,17 +57,17 @@ def update_student(student_id: int, updated_student: Student):
     }
 
 
-@app.delete("/students/{student_id}")
+@router.delete("/student/{student_id}")
+def delete_student(student_id: int):
 
-def delete_student(student_id:int):
     for student in students:
         if student.id == student_id:
             students.remove(student)
-            return{
-                "message":"Student Deleted"
+
+            return {
+                "message": "Student Deleted"
             }
-        return{"message":"student not found"}
 
-
-
-   
+    return {
+        "message": "Student Not Found"
+    }
