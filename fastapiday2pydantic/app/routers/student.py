@@ -48,7 +48,7 @@ def update_student(student_id: int, updated_student: Student):
             students[index] = updated_student
 
             return {
-                "message": "Updated Successfully",
+                "message": " student Updated Successfully",
                 "student": updated_student
             }
 
