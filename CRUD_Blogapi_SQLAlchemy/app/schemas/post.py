@@ -7,6 +7,12 @@ class PostCreate(BaseModel):
     author: str
 
 
+
+class PostUpdate(BaseModel):
+    title: str
+    content: str
+    author: str
+    
 class PostResponse(BaseModel):
     id: int
     title: str

@@ -1,1 +1,1 @@
-from .post import PostCreate , PostResponse
+from .post import PostCreate ,PostUpdate, PostResponse
