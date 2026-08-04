@@ -32,7 +32,7 @@ def get_current_user(
     if payload is None:
         raise HTTPException(
             status_code=401,
-            detail="Invalid or Expired Token"
+            detail="invalid or expired token"
         )
 
     email = payload.get("sub")
